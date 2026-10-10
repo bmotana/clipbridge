@@ -9,22 +9,24 @@ Clipbridge is a small Flask service that receives text over HTTP and copies it t
 
 ## Install
 
-Create and activate a virtual environment, then install the dependencies:
+Create and activate a virtual environment, then install Clipbridge:
 
 ```bash
 python -m venv .venv
 # Windows PowerShell: .venv\Scripts\Activate.ps1
 # macOS/Linux: source .venv/bin/activate
-python -m pip install -r requirements.txt
+python -m pip install .
 ```
 
 ## Run
 
 ```bash
-python clipboard_server.py
+clipbridge
 ```
 
-The server listens on port `5000`. The current configuration binds to `0.0.0.0`, so it can be reachable by other devices on the network. Run it only on a trusted network and use firewall rules as appropriate; this service does not provide authentication or transport encryption.
+The same command is available as `python -m clipbridge.cli`.
+
+The server listens on port `5000` and accepts request bodies up to 1 MiB. It binds to `0.0.0.0`, so it can be reachable by other devices on the network. Set `CLIPBRIDGE_AUTH_TOKEN` to require a token; clients can send it as `Authorization: Bearer <token>` or `X-API-Key: <token>`. Run it only on a trusted network and use firewall rules as appropriate; this service does not provide transport encryption.
 
 ## Send text
 
@@ -53,6 +55,7 @@ Install development tools and run the configured linter:
 ```bash
 python -m pip install -r requirements-dev.txt
 ruff check .
+pytest
 ```
 
 GitHub Actions runs Ruff on pushes and pull requests.

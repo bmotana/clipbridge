@@ -10,8 +10,13 @@ env/
 build/
 dist/
 *.egg-info/
+pip-wheel-metadata/
 .ruff_cache/
 .pytest_cache/
+pytest-cache-files-*/
+.hypothesis/
+.tox/
+.nox/
 .coverage
 htmlcov/
 
